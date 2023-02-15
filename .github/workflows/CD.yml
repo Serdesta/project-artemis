@@ -7,7 +7,6 @@ env:
   tag_new_version: "${GITHUB_SHA}"
 
 
-
 # This is a basic workflow to help you get started with Actions
 
 name: CI

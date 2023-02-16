@@ -72,7 +72,7 @@ jobs:
       
       
       - name: SonarCloud Scan
-        if ${{ env.enable_sonar }} == "true"
+        if: ${{ env.enable_sonar == "true" }} 
         uses: sonarsource/sonarcloud-github-action@master
         env:
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN }}

@@ -3,6 +3,7 @@ from flask import render_template
 
 
 app = Flask(__name__)
+app.config['WTF_CSRF_ENABLED'] = False # Sensitive
 
 @app.route('/')
 def index():
@@ -10,4 +11,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=true, host='0.0.0.0')

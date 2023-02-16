@@ -76,7 +76,7 @@ jobs:
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: sonarcloud.io
         with:  
-        projectBaseDir: .
+        projectBaseDir: .github/workflows/CD.yml
         args: >
           -Dsonar.organization=serdesta
           -Dsonar.projectKey=Serdesta_project-artemis

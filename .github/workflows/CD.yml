@@ -68,7 +68,19 @@ jobs:
         run: |
           git checkout ${{ env.app_version }}
           ls -l
-
+      
+      
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: sonarcloud.io
+        with:  
+        projectBaseDir: .
+        args: >
+          -Dsonar.organization=serdesta
+          -Dsonar.projectKey=Serdesta_project-artemis
+          -Dsonar.verbose=true
 
 
       # Runs a set of commands using the runners shell

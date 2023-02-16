@@ -79,7 +79,7 @@ jobs:
           SONAR_HOST_URL: sonarcloud.io
         with: 
           projectBaseDir = .
-          run: sonar-scanner \
+          run: ../sonar-scanner \
             -Dsonar.organization=serdesta \
             -Dsonar.projectKey=Serdesta_project-artemis \
             -Dsonar.sources=. \

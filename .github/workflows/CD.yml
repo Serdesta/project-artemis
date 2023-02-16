@@ -5,6 +5,7 @@ env:
   project_id:      "${{ secrets.PROJECT_ID }}"
   app_name:        "artemis"
   tag_new_version: "${GITHUB_SHA}"
+  enable_sonar:    true
 
 
 # This is a basic workflow to help you get started with Actions
@@ -71,15 +72,17 @@ jobs:
       
       
       - name: SonarCloud Scan
+        if ${{ env.enable_sonar }}= "true"
         uses: sonarsource/sonarcloud-github-action@master
         env:
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: sonarcloud.io
-        with:  
-        args: >
-          -Dsonar.organization=serdesta
-          -Dsonar.projectKey=Serdesta_project-artemis
-          -Dsonar.verbose=true
+        with: 
+          projectBaseDir = .
+          args: >
+            -Dsonar.organization=serdesta
+            -Dsonar.projectKey=Serdesta_project-artemis
+            -Dsonar.verbose=true
 
 
       # Runs a set of commands using the runners shell

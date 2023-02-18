@@ -6,16 +6,24 @@ env:
   app_name:        "artemis"
   tag_new_version: "${GITHUB_SHA}"
 
+  # Sonar stuff, please update accordingly
+  enable_sonar:    "true"
+  sonar_organization: "sidarkaya"
+  sonar_projectKey: "Serdesta_project-artemis"
+  sonar_login: "bec866f83ef5ffb4ea59c4f25893169c1ebf9a92"
+
+
 
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: ContinuousDelivery
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "master" ]
+
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -62,6 +70,7 @@ jobs:
           ls -l
 
 
+
       # Runs a set of commands using the runners shell
       - name: Remove Old Images
         working-directory: ${{ env.app_name }}
@@ -102,6 +111,8 @@ jobs:
       - name: Authenticate to repository
         run: |
           gcloud auth configure-docker  ${{ env.repo_region }}-docker.pkg.dev
+
+          
 
 
       # Runs a set of commands using the runners shell

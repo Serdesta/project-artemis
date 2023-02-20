@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"vault-terraform-k8s-namespace","Source":"../modules/terraform-k8s-namespace","Dir":""},{"Key":"","Source":"","Dir":"."},{"Key":"vault-terraform-helm","Source":"../modules/terraform-helm","Dir":""}]}

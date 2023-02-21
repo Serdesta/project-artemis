@@ -8,7 +8,7 @@ image:
   repository: us-central1-docker.pkg.dev/terraform-project-sidar/artemis/artemis
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "d3fd2c27734c7c7c49b7fe0d51fef0641e4b710f"
+  tag: "2.0.0"
 
 imagePullSecrets: []
 nameOverride: ""

@@ -1,5 +1,5 @@
-module "k8s-namespace" {
-    source = "../modules/terraform-k8s-namespace"
+module "artemis-namespace" {
+    source = "./k8s-namespace"
     labels = {
         app = "artemis"
     }

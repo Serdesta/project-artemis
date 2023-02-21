@@ -7,7 +7,7 @@ resource "random_password" "password" {
 
 
 resource "vault_mount" "kvv2" {
-  path        = "us/development"
+  path        = "project/development"
   type        = "kv"
   options     = { version = "2" }
   description = "KV Version 2 secret engine mount"

@@ -3,5 +3,5 @@ module "k8s-namespace" {
     labels = {
         app = "artemis"
     }
-    namespace_name = "artemis"
+    name = "artemis"
 }

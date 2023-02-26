@@ -7,7 +7,7 @@ resource "random_password" "password" {
 
 
 resource "vault_mount" "kvv2" {
-  path        = "project/development"
+  path        = "us/artemis"
   type        = "kv"
   options     = { version = "2" }
   description = "KV Version 2 secret engine mount"
@@ -15,12 +15,21 @@ resource "vault_mount" "kvv2" {
 
 
 resource "vault_mount" "kvv2us" {
-  path        = "eu/development/"
+  path        = "eu/artemis/"
   type        = "kv"
   options     = { version = "2" }
   description = "KV Version 2 secret engine mount"
 }
 
+resource "vault_kv_secret_v2" "secret" {
+  mount = "permanent_passwords"
+  name  = "artemis"
+  data_json = jsonencode(
+    {
+      password = random_password.password.result
+    }
+  )
+}
 
 # resource "google_sql_database_instance" "artemis" {
 #   name                = "artemis"

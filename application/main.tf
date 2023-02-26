@@ -1,5 +1,5 @@
-resource "kubernetes_namespace" "artemis-ns" {
+resource "kubernetes_namespace" "artemis-dev" {
   metadata {
-    name        = "artemis-ns"
+    name        = "artemis-dev"
   }
 }

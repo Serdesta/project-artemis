@@ -38,14 +38,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget gnupg2 curl
-          wget -nc --no-check-certificate https://download.webmin.com/jcameron-key.asc
-          gpg --batch --yes --dearmor jcameron-key.asc | sudo tee /usr/share/keyrings/jcameron-key.gpg > /dev/null
-  
+      
 
       # Authenticate to GCP
 

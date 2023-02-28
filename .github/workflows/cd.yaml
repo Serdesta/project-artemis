@@ -51,18 +51,6 @@ jobs:
       - name: Check Out Helm Repo
         run: |
           git clone "${{ env.helm_repository }}"
-        
-
-      # Get k8s credentials
-      - name: Get k8s credentials
-        run: |
-          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-          sudo apt-get update
-          sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin kubectl
-          export USE_GKE_GCLOUD_AUTH_PLUGIN=True
-          gcloud container clusters get-credentials "${{ env.cluster_name }}" --region  "${{ env.region }}"
-          kubectl get nodes
 
 
       - name: Configure Backend
@@ -80,6 +68,21 @@ jobs:
         working-directory: "custom_helm_chart"
         run: |
           terraform workspace  select  ${{ env.environment }}   ||  terraform workspace  new  ${{ env.environment }}
+
+      - id: 'auth-to-k8s'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
+
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
+          cluster_name: 'project-cluster'
+          location: 'us-central1'
+
+      # The KUBECONFIG env var is automatically exported and picked up by kubectl.
+      - id: 'kubeconfig'
+        run: 'mkdir ~/.kube && cat $KUBECONFIG > ~/.kube/config'    
 
 
       # Runs a set of commands using the runners shell
